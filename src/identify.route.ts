@@ -14,9 +14,7 @@ identifyRouter.post('/', async (req: Request<{}, {}, IdentifyRequest>, res: Resp
   try {
     const contact = await identifyContact({ email, phoneNumber });
 
-    return res.status(200).json({
-      contact,
-    });
+    return res.status(200).json(contact);
   } catch (error) {
     console.error('Error identifying contact:', error);
     return res.status(500).json({ error: 'Internal server error' } as any);
