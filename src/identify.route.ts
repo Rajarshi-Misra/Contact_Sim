@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import prisma from '../lib/prisma';
+import prisma from './lib/prisma';
+import { identifyContact } from './identify.controller';
 
 const identifyRouter = Router();
 
@@ -10,7 +11,9 @@ identifyRouter.post('/', async (req, res) => {
     return res.status(400).json({ error: 'Either email or phoneNumber must be provided' });
   }
 
-  return res.status(200).json({ message: 'Validation passed', email, phoneNumber });
+  const matchedContacts = await identifyContact(email, phoneNumber);
+
+  return res.status(200).json({ message: 'Validation passed', ...matchedContacts});
 });
 
 export default identifyRouter;

@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import prisma from './lib/prisma';
-import identifyRouter from './routes/identify';
+import identifyRouter from './identify.route';
 
 dotenv.config();
 const app = express();
